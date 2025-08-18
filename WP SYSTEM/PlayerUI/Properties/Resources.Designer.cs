@@ -59,5 +59,15 @@ namespace PlayerUI.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon _7953c261_974a_4135_a2ec_59c65dd31e36 {
+            get {
+                object obj = ResourceManager.GetObject("_7953c261_974a_4135_a2ec_59c65dd31e36", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

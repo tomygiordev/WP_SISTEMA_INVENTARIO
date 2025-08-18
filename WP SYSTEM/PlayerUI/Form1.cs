@@ -187,5 +187,10 @@ namespace PlayerUI
             childForm.BringToFront();
             childForm.Show();
         }
+
+        private void panelChildForm_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
