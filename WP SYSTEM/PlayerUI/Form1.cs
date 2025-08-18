@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices; 
+using Guna.UI2.WinForms; 
 
 namespace PlayerUI
 {
@@ -16,6 +18,52 @@ namespace PlayerUI
         {
             InitializeComponent();
             hideSubMenu();
+
+            var btnClose = CrearBoton("Cerrar", Properties.Resources.ic_close, (s, e) => this.Close());
+
+            var btnMax = CrearBoton("Maximizar/Restaurar", Properties.Resources.ic_max, (s, e) =>
+            {
+                if (this.WindowState == FormWindowState.Normal)
+                    this.WindowState = FormWindowState.Maximized;
+                else
+                    this.WindowState = FormWindowState.Normal;
+            });
+
+            var btnMin = CrearBoton("Minimizar", Properties.Resources.ic_min, (s, e) =>
+            {
+                this.WindowState = FormWindowState.Minimized;
+            });
+
+            // Agregar los botones al panel (importa el orden)
+            panelMaximizar.Controls.Add(btnMin);
+            panelMaximizar.Controls.Add(btnMax);
+            panelMaximizar.Controls.Add(btnClose);
+        }
+
+        private Guna.UI2.WinForms.Guna2Button CrearBoton(string tooltip, Image icon, EventHandler onClick)
+        {
+            var btn = new Guna.UI2.WinForms.Guna2Button();
+
+            btn.Dock = DockStyle.Right;
+            btn.Width = 40;
+            btn.FillColor = Color.Transparent;
+            btn.ForeColor = Color.White;
+            btn.Image = icon;
+            btn.ImageSize = new Size(16, 16);
+            btn.BorderRadius = 6;
+            btn.Cursor = Cursors.Hand;
+
+            // Efectos hover / pressed
+            btn.HoverState.FillColor = Color.FromArgb(50, 255, 255, 255); // hover translúcido
+            btn.PressedColor = Color.FromArgb(80, 200, 200, 200);
+
+            btn.Click += onClick;
+
+            // Tooltip
+            var tip = new ToolTip();
+            tip.SetToolTip(btn, tooltip);
+
+            return btn;
         }
 
         private void hideSubMenu()
